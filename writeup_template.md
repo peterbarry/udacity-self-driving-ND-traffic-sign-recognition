@@ -25,7 +25,10 @@ The goals / steps of this project are the following:
 [image7]: ./german-web-test-images/PriorityRoad.jpg "Traffic Sign 4"
 [image8]: ./german-web-test-images/roadWorks-2.jpg "Traffic Sign 5"
 [image9]: ./german-web-test-images/stop.jpg "Traffic Sign 6"
-[image10]: ./intermediate_images/validation-accuracy.png "validation accuracy"
+
+[image10]: ./intermediate_images/do-not-enter-vis1.png "visualize 1 "
+[image11]: ./intermediate_images/do-not-enter-vis2.png "visualize 2 "
+[image12]: ./intermediate_images/do-not-enter-vis3.png "visualize 2 "
 
 
 ---
@@ -116,6 +119,7 @@ To train the model, I used an adam optimiser.
 
 I tried varing epoch/batch and learning rates
 
+
 | Epochs         		|     Batch size | Learning rate | Final Validatin accuracy | comment|
 |:---------------------:|:-----------------:|:----------------:|:--------------:|
 | 10         		| 32 							| 0.001 | 0.93 | good initial start|
@@ -157,7 +161,6 @@ All images where of a different scale but all quite clear and the sign occupied 
 
 *** Model Predictions for new test data source on line ***
 
-
 Here are the results of the prediction:
 
 | Image			        |     Prediction	        					|
@@ -170,22 +173,43 @@ Here are the results of the prediction:
 | Stop| Stop|
 
 
-The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set of
+The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%. This compares favorably (better, but small data set) to the accuracy on the test set of
 * Test Accuracy = 0.941
 
-####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
-
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
 
 | Probability         	|     Prediction	        					|
 |:---------------------:|:---------------------------------------------:|
-| .60         			| Stop sign   									|
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| 1.00         			| 30 Speed   									|
+| 1.00     				| Caution 										|
+| 1.00					| Do not enter											|
+| 1.00	      			| Priority Road				 				|
+| 1.00				    | Roadworks      							|
+| 1.00| Stop |
 
 
-For the second image ...
+The sign type for test images are
+[ 1 18 17 12 25 14]
+
+Top Predictions [
+ [ **1** 25 13 35 33]
+ [**18**  0  1  2  3]
+ [**17**  0  1  2  3]
+ [**12**  0  1  2  3]
+ [**25** 18  5  2  1]
+ [**14**  0  1  2  3]]
+
+
+**** Visualisation of the network ****
+
+The notepad shows the activation in the first and second convolution layers of the network. I have selected the "do no enter" sign to make an assesment to how the network is behaving
+
+![alt text][image10]
+
+* The first activation layers
+![alt text][image11]
+
+* The second activatin layers
+![alt text][image12]
+
+In the frist layer, one of the darkest areas is the horizontal line, a distinguishing aspect of this sign. The following convolution layer shows activations for the horizontal line and circular segments of the sign outline.
